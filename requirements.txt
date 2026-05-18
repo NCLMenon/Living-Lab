@@ -1,0 +1,6 @@
+pyinaturalist
+pandas
+geopandas
+matplotlib
+seaborn
+folium

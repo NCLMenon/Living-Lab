@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agripolis Living Lab WebGIS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            aspect-ratio: 1 / 1;
+            background: #eee;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            font-size: 0.85rem;
+        }
+        .heatmap-controls {
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #ddd;
+        }
+        select.heatmap-select {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--primary-color);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fa-solid fa-leaf"></i> Agripolis Lab</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a onclick="showTab('home')" id="link-home" class="active"><i class="fa-solid fa-house" style="width:25px;"></i> Home</a></li>
+            <li><a onclick="showTab('mappe')" id="link-mappe"><i class="fa-solid fa-map-location-dot" style="width:25px;"></i> Maps</a></li>
+            <li><a onclick="showTab('specie')" id="link-specie"><i class="fa-solid fa-chart-pie" style="width:25px;"></i> Species & Analysis</a></li>
+            <li><a onclick="showTab('script')" id="link-script"><i class="fa-solid fa-code" style="width:25px;"></i> Script & Method</a></li>
+            <li><a href="https://www.inaturalist.org/projects/living-lab-campus-agripolis-unipd?tab=about" target="_blank" style="margin-top: 2rem; background: rgba(255,255,255,0.2);"><i class="fa-solid fa-arrow-up-right-from-square" style="width:25px;"></i> iNat Project</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>&copy; 2026 WebGIS Dashboard</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- TAB: HOME -->
+        <section id="tab-home" class="tab-pane active">
+            <div class="content-header">
+                <h1>Citizen Science at Agripolis Campus</h1>
+            </div>
+            
+            <div class="card">
+                <h3>1. Innovation and Open Science contribution</h3>
+                <p>The innovative project “Living lab: innovation and citizen science for environmental impact assessment” aims to connect biodiversity and urban areas through an Open Science approach. Its aims to transform the Agripolis campus of the Università degli Studi di Padova into an open-air laboratory. The project combines citizen science, everyday technologies, and expert knowledge, focusing on urban biodiversity to raise awareness about the significant ecological value of anthropized areas. Students collaborated with experts, researchers, and professors to collect and investigate ecological data, making the project a clear example of open science, where knowledge production get out from laboratories, becoming an inclusive, collaborative and transparent process. The innovative element of the project was the implementation of accessible technologies as photo cameras, audio, smartphone apps and GPS, allowing broad participation in biodiversity monitoring.</p>
+                <p>Data collection was conducted by participants under experts’ guidance (flora: Roberto Rizzieri Masin; herpetofauna: Giovanni Bombieri; avifauna: Andrea Favaretto; environmental impact assessment Andrea Rizzi). Moreover, the species identification was supported by the citizen science platform iNaturalist. The collected data were directly uploaded to the "Living Lab - Campus Agripolis UNIPD" project on iNaturalist. Today, it includes over 310 observations, highlighting the interest from partecipants and species diversity hosted by Agripolis.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
+                    <img src="assets/citizen_1.jpg" alt="Field activities" class="hero-image" onerror="this.style.display='none'">
+                    <img src="assets/citizen_2.jpg" alt="Field activities 2" class="hero-image" onerror="this.style.display='none'">
+                    <p style="text-align:center; color: var(--text-light); font-size: 0.9rem;"><em>Figure 1: Project participants during field activities for identifying the flora of the Agripolis campus, under the guidance of the expert Roberto Rizzieri Masin.</em></p>
+                </div>
+                
+                <div class="card">
+                    <h3>2. Accessibility, reusability, and broader benefits</h3>
+                    <p>The project's innovation relies in its continuous updates and contributions from anyone interested, thanks to open access project on the iNaturalist platform. A key strength of the project is its high and free accessibility to contribute. By relying on smartphones, it eliminates technical and economic barriers. Anyone with a smartphone can make a fundamental contribution to studying and deepening knowledge of Agripolis campus flora and fauna.</p>
+                    <p>Open access to collected data ensures reusability, providing valuable information for future analyses and studies. Any institution can replicate the project structure, creating a network of interdisciplinary initiatives that directly involve communities in protecting and maintaining biodiversity in urban areas.</p>
+                    <p>The project's go well beyond institutional boundaries. For the scientific community, it provides additional data for monitoring human-impacted landscapes, offering potential opportunities for future collaborations. For students, it develops technical and methodological skills in environmental impact assessment, data collection, and science communication. For the local area, it raises awareness of the ecological value of university spaces and promotes more responsible use of the campus.</p>
+                </div>
+            </div>
+
+            <!-- iNat Photo Gallery -->
+            <div class="content-header" style="margin-top: 4rem;">
+                <h2>iNaturalist Photo Gallery</h2>
+                <p>Latest high-quality observations from our Citizen Scientists on the field.</p>
+            </div>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Javascript will populate this with images from gallery.js -->
+            </div>
+        </section>
+
+        <!-- TAB: MAPS -->
+        <section id="tab-mappe" class="tab-pane">
+            <div class="content-header">
+                <h1>Interactive Cartography</h1>
+            </div>
+
+            <div class="card">
+                <h3>Observations Distribution</h3>
+                <p>Use the <strong>Layer Control menu on the top right</strong> of the map to select specific taxonomic groups. Click on markers to see the original photo taken by the observer.</p>
+                <div class="map-container">
+                    <iframe src="map.html" title="Interactive Distribution Map"></iframe>
+                </div>
+                <div style="text-align: right; margin-top: 10px;">
+                    <a href="map.html" target="_blank" style="color:var(--secondary-color); font-weight:bold;">Open Fullscreen Map</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Observation Density (Heatmap)</h3>
+                <p>This map shows the density of biological observations across the campus.</p>
+                
+                <!-- Custom Heatmap Dropdown -->
+                <div class="heatmap-controls">
+                    <label for="heatmap-selector"><strong>Filter by Taxonomic Group:</strong></label>
+                    <select id="heatmap-selector" class="heatmap-select" onchange="changeHeatmap(this.value)">
+                        <option value="heatmap.html">Tutte le Specie (All Species)</option>
+                        <!-- Populated by taxons.js -->
+                    </select>
+                </div>
+
+                <div class="map-container">
+                    <iframe id="heatmap-iframe" src="heatmap.html" title="Observation Density Heatmap"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: SPECIES & ANALYSIS -->
+        <section id="tab-specie" class="tab-pane">
+            <div class="content-header">
+                <h1>Biodiversity Statistics</h1>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Taxonomic Groups Proportion</h3>
+                    <img src="assets/pie_chart_py.png" alt="Taxonomic Distribution" style="width:100%;">
+                </div>
+                <div class="card">
+                    <h3>Yearly Activity</h3>
+                    <p>Frequency of observations recorded over the years.</p>
+                    <img src="assets/activity_chart.png" alt="Activity by Year" style="width:100%;">
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <h3>Top Observers (Citizen Scientists)</h3>
+                <p>The most active participants within the Living Lab Agripolis project.</p>
+                <img src="assets/top_observers.png" alt="Top Observers" style="width:100%;">
+            </div>
+        </section>
+
+        <!-- TAB: SCRIPT & METHOD (R NOTEBOOK) -->
+        <section id="tab-script" class="tab-pane notebook">
+            <div class="content-header">
+                <h1>Methodology and R Script</h1>
+            </div>
+
+            <div class="card">
+                <p>This "Notebook" illustrates the technical steps used to automatically extract iNaturalist public API data and generate maps using the <strong>R programming language</strong>.</p>
+            </div>
+
+            <!-- Notebook Cell 1 -->
+            <div class="notebook-cell">
+                <div class="notebook-markdown">
+                    <h3>1. Package Installation and Loading</h3>
+                    <p>We start by using <code>pacman</code> to automatically install and load the necessary R libraries for data manipulation and spatial mapping.</p>
+                </div>
+                <div class="notebook-code">
+<pre><span class="comment"># Load libraries safely</span>
+<span class="keyword">if</span>(!<span class="function">require</span>(<span class="string">"pacman"</span>)) {
+  <span class="function">install.packages</span>(<span class="string">"pacman"</span>)
+}
+
+pacman::<span class="function">p_load</span>(
+  dplyr, rinat, ggplot2, stringr, 
+  sf, maptiles, ggspatial, patchwork
+)</pre>
+                </div>
+            </div>
+
+            <!-- Notebook Cell 2 -->
+            <div class="notebook-cell">
+                <div class="notebook-markdown">
+                    <h3>2. Fetching and Cleaning Data</h3>
+                    <p>Using the <code>rinat</code> package, we download observations directly from the Living Lab project. We then clean the dataset by removing 'casual' grade observations and those missing species-level identification.</p>
+                </div>
+                <div class="notebook-code">
+<pre><span class="comment"># Import dataset</span>
+inat_data = <span class="function">get_inat_obs_project</span>(<span class="string">"living-lab-campus-agripolis-unipd"</span>, type = <span class="function">c</span>(<span class="string">"observations"</span>, <span class="string">"info"</span>), raw = <span class="keyword">FALSE</span>)
+
+<span class="comment"># Clean the observations</span>
+inat_data_clean <- inat_data %>%
+  <span class="function">filter</span>(
+    quality_grade != <span class="string">"casual"</span>,                      <span class="comment"># remove casual observations</span>
+    <span class="function">str_count</span>(taxon.name, <span class="string">"\\w+"</span>) > 1              <span class="comment"># delete observations at genus level</span>
+  )</pre>
+                </div>
+            </div>
+
+            <!-- Notebook Cell 3 -->
+            <div class="notebook-cell">
+                <div class="notebook-markdown">
+                    <h3>3. Spatial Transformation and Mapping</h3>
+                    <p>We convert the cleaned data frame into a spatial <code>sf</code> object to map the observations over an Esri World Imagery basemap.</p>
+                </div>
+                <div class="notebook-code">
+<pre><span class="comment"># Create sf object (WGS84)</span>
+inat_sf <- <span class="function">st_as_sf</span>(
+  inat_data_clean,
+  coords = <span class="function">c</span>(<span class="string">"longitude"</span>, <span class="string">"latitude"</span>),
+  crs = 4326,     
+  remove = <span class="keyword">FALSE</span>  
+)
+
+<span class="comment"># Reproject data as required by maptiles (Web Mercator)</span>
+inat_sf_web <- <span class="function">st_transform</span>(inat_sf, 3857)
+
+<span class="comment"># Download the basemap</span>
+basemap <- <span class="function">get_tiles</span>(inat_sf_web, provider = <span class="string">"Esri.WorldImagery"</span>)
+
+<span class="comment"># Generate spatial distribution map with ggplot2</span>
+map_plot = <span class="function">ggplot</span>() +
+  <span class="function">layer_spatial</span>(basemap) +
+  <span class="function">geom_sf</span>(data = inat_sf_web, <span class="function">aes</span>(color = iconic_taxon_name), size = 1.5, alpha = 0.8) +
+  <span class="function">theme_minimal</span>()
+
+<span class="function">print</span>(map_plot)</pre>
+                </div>
+            </div>
+
+            <!-- Notebook Cell 4 -->
+            <div class="notebook-cell">
+                <div class="notebook-markdown">
+                    <h3>4. Density Heatmap</h3>
+                    <p>Finally, we calculate the density of observations using <code>stat_density_2d_filled</code> to visualize the most active areas of the campus.</p>
+                </div>
+                <div class="notebook-code">
+<pre><span class="comment"># Density Heatmap</span>
+density_plot = <span class="function">ggplot</span>() +
+  <span class="function">layer_spatial</span>(basemap) +
+  <span class="function">stat_density_2d_filled</span>(
+    data = inat_sf_web,
+    <span class="function">aes</span>(x = sf::<span class="function">st_coordinates</span>(inat_sf_web)[, 1],
+        y = sf::<span class="function">st_coordinates</span>(inat_sf_web)[, 2],
+        fill = <span class="function">after_stat</span>(level)),
+    alpha = 0.7,
+    contour_var = <span class="string">"density"</span>
+  ) +
+  <span class="function">scale_fill_viridis_d</span>(option = <span class="string">"magma"</span>)
+
+<span class="function">print</span>(density_plot)</pre>
+                </div>
+            </div>
+            
+        </section>
+
+    </main>
+
+    <!-- Data Sources generated by Python -->
+    <script src="assets/gallery.js" onerror="console.warn('gallery.js not generated yet')"></script>
+    <script src="assets/taxons.js" onerror="console.warn('taxons.js not generated yet')"></script>
+
+    <!-- App Logic -->
+    <script>
+        // SPA Tab Switching
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById('link-' + tabId).classList.add('active');
+        }
+
+        // Change Heatmap iframe source
+        function changeHeatmap(src) {
+            document.getElementById('heatmap-iframe').src = src;
+        }
+
+        // Initialize dynamic contents on load
+        window.onload = function() {
+            // Populate Photo Gallery
+            if (typeof inatPhotos !== 'undefined') {
+                const container = document.getElementById('gallery-container');
+                inatPhotos.forEach(photo => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `
+                        <img src="${photo.url}" alt="${photo.taxon}">
+                        <div class="gallery-caption">
+                            <strong>${photo.taxon}</strong><br>
+                            Photo by ${photo.author} (via iNaturalist)
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+
+            // Populate Heatmap Dropdown
+            if (typeof taxonList !== 'undefined') {
+                const selector = document.getElementById('heatmap-selector');
+                taxonList.forEach(taxon => {
+                    const option = document.createElement('option');
+                    option.value = `heatmap_${taxon.safe_name}.html`;
+                    option.text = taxon.name;
+                    selector.appendChild(option);
+                });
+            }
+        };
+    </script>
+</body>
+</html>
